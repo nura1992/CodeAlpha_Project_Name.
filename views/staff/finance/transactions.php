@@ -1,0 +1,7 @@
+<?php $title='Transactions'; ?>
+<div class="card"><h1>Transactions</h1>
+<form method="get" style="display:flex;gap:8px;flex-wrap:wrap"><input name="q" value="<?= e($filters['q']??'') ?>" placeholder="Search ref, email"><select name="status"><option value="">All statuses</option><option value="pending" <?= ($filters['status']??'')==='pending'?'selected':'' ?>>Pending</option><option value="success" <?= ($filters['status']??'')==='success'?'selected':'' ?>>Success</option><option value="failed" <?= ($filters['status']??'')==='failed'?'selected':'' ?>>Failed</option><option value="refunded" <?= ($filters['status']??'')==='refunded'?'selected':'' ?>>Refunded</option></select><select name="gateway"><option value="">All gateways</option><option value="paystack" <?= ($filters['gateway']??'')==='paystack'?'selected':'' ?>>Paystack</option><option value="flutterwave" <?= ($filters['gateway']??'')==='flutterwave'?'selected':'' ?>>Flutterwave</option></select><button class="btn btn-secondary">Filter</button></form>
+</div>
+<div class="card"><table class="table"><tr><th>Ref</th><th>User</th><th>Gateway</th><th>Amount</th><th>Status</th><th>When</th></tr>
+<?php foreach($transactions as $t): ?><tr><td><a href="/staff/finance/transactions/<?= (int)$t['id'] ?>"><?= e($t['reference']) ?></a></td><td><?= e($t['user_email']??'') ?></td><td><?= e($t['gateway']) ?></td><td><?= e(money($t['amount'],$t['currency'])) ?></td><td><?= e($t['status']) ?></td><td class="muted" style="font-size:12px"><?= e($t['created_at']) ?></td></tr><?php endforeach; ?>
+</table></div>

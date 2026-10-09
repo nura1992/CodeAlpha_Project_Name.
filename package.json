@@ -1,0 +1,17 @@
+{
+  "name": "codealpha",
+  "private": true,
+  "type": "module",
+  "description": "CodeAlpha — matchmaking and community platform (PHP + SQLite dev, MySQL prod).",
+  "scripts": {
+    "dev": "node bin/server.mjs",
+    "install:php": "node bin/install.mjs",
+    "signaling": "node tools/signaling-server.mjs",
+    "lint:php": "node tools/lint-php.mjs"
+  },
+  "dependencies": {
+    "@php-wasm/node": "^3.1.57",
+    "@php-wasm/universal": "^3.1.57",
+    "ws": "^8.21.0"
+  }
+}

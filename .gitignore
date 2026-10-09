@@ -1,0 +1,29 @@
+# Dependencies / tooling
+node_modules/
+vendor/
+
+# Local configuration overrides
+config/config.local.php
+.env
+.env.*
+
+# Runtime data
+storage/*.sqlite
+storage/*.sqlite-*
+storage/logs/*.log
+storage/sessions/*
+storage/cache/*
+storage/protected/verifications/*
+storage/protected/chat/*
+public/uploads/*
+!public/uploads/.htaccess
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Installer marker
+.installed

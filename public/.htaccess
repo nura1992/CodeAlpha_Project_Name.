@@ -1,0 +1,39 @@
+# CodeAlpha — Apache configuration
+# Document root must point at /public.
+
+RewriteEngine On
+
+# Never serve dotfiles or the storage directory.
+RewriteRule ^\. - [F,L]
+RewriteRule ^storage(/|$) - [F,L]
+
+# Existing files and directories are served directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Prevent PHP execution inside the uploads directory.
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Everything else goes to the front controller.
+RewriteRule ^ index.php [L]
+
+<FilesMatch "\.(log|sqlite|sqlite3|sql|md|json|lock|env)$">
+    Require all denied
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# PHP hardening for the uploads directory
+<Directory "uploads">
+    <FilesMatch "\.(php|phtml|php[0-9]|phar)$">
+        Require all denied
+    </FilesMatch>
+</Directory>
