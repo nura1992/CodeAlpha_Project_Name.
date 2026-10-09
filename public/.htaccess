@@ -1,0 +1,11 @@
+# Apache: route everything that is not a real file to the front controller.
+Options -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+RewriteRule ^ index.php [QSA,L]
+
+# Never serve configuration, logs or source-like files from the web root.
+<FilesMatch "\.(env|log|sql|ini|md|lock)$">
+  Require all denied
+</FilesMatch>

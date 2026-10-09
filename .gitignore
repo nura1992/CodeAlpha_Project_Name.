@@ -1,0 +1,22 @@
+# Secrets and local environment
+config/.env
+.env
+.env.*
+!.env.example
+
+# Private storage and logs (never commit verification media or messages)
+storage/
+*.log
+
+# Dependencies and build output
+node_modules/
+signalling/node_modules/
+vendor/
+coverage/
+dist/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
